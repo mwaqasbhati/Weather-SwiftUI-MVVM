@@ -2,8 +2,8 @@
 //  LocationManager.swift
 //  WeatherAPI-SwiftUI-MVVM
 //
-//  Created by Muhammad Zohaib Ehsan on 3/26/20.
-//  Copyright © 2020 Muhammad Zohaib Ehsan. All rights reserved.
+//  Created by M.Waqas on 3/26/20.
+//  Copyright © 2020 M.Waqas. All rights reserved.
 //
 
 import Foundation
@@ -13,15 +13,22 @@ import CoreLocation
 class LocationManager: NSObject, ObservableObject {
   
   private let locationManager = CLLocationManager()
-  let objectWillChange = PassthroughSubject<String, Error>()
   private let geocoder = CLGeocoder()
-
-  @Published var status: CLAuthorizationStatus? {
-    willSet { objectWillChange.send() }
+  let objectWillChange = PassthroughSubject<String, APIServiceError>()
+  
+  @Published var status: CLAuthorizationStatus = .notDetermined {
+    didSet {
+        if status == .denied || status == .restricted {
+            objectWillChange.send(completion: .failure(APIServiceError.locationNotFound))
+        }
+    }
   }
-
   @Published var location: CLLocation? {
-    willSet { objectWillChange.send() }
+    didSet {
+        if location == nil {
+            objectWillChange.send(completion: .failure(APIServiceError.locationNotFound))
+        }
+    }
   }
   @Published var placemark: CLPlacemark?
 
@@ -30,6 +37,7 @@ class LocationManager: NSObject, ObservableObject {
 
     self.locationManager.delegate = self
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    self.locationManager.requestWhenInUseAuthorization()
     self.locationManager.requestLocation()
   }
 
@@ -55,6 +63,6 @@ extension LocationManager: CLLocationManagerDelegate {
         self.geocode()
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
+        location = nil
     }
 }

@@ -2,8 +2,8 @@
 //  Utility.swift
 //  WeatherAPI-SwiftUI-MVVM
 //
-//  Created by Muhammad Zohaib Ehsan on 3/26/20.
-//  Copyright © 2020 Muhammad Zohaib Ehsan. All rights reserved.
+//  Created by M.Waqas on 3/26/20.
+//  Copyright © 2020 M.Waqas. All rights reserved.
 //
 
 import Foundation
@@ -11,6 +11,9 @@ import Foundation
 struct Constant {
     static let YYYY_MM_dd_HH_mm_ss = "YYYY-MM-dd HH:mm:ss"
     static let HH_mm = "HH:mm"
+    static let MMM_d_YYYY = "MMM d"
+    static let ALLOWED_CHAR = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ,"
+    static let INPUT_TEXT_VALIDATION_ERROR = "you can search minimum 3 and maximum 7 cities and all should be comma separated."
 }
 
 extension Double {

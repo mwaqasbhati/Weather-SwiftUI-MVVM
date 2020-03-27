@@ -12,14 +12,14 @@ import SwiftUI
 struct TabbarView: View {
     var body: some View {
         TabView {
-            ForecastListView(viewModel: ForecastViewModel(apiService: APIService(), trackerService: TrackerService(), experimentService: ExperimentService()))
+            ForecastListView(viewModel: ForecastViewModel(apiService: APIService()))
                 .tabItem {
-                    Image(systemName: "square.and.pencil")
+                    Image(systemName: "calendar.circle")
                     Text("Forecast")
                 }
-            CurrentWeatherListView(viewModel: CurrentWeatherViewModel(apiService: APIService(), trackerService: TrackerService(), experimentService: ExperimentService()))
+            CurrentWeatherListView(viewModel: CurrentWeatherViewModel(apiService: APIService()))
             .tabItem {
-                Image(systemName: "list.dash")
+                Image(systemName: "cloud.sun.fill")
                 Text("Weather")
             }
         }

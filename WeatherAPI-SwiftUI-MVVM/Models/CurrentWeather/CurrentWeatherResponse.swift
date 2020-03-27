@@ -18,13 +18,21 @@ struct CurrentWeatherResponse: Codable, Identifiable {
     let sys: Sys?
     let timezone, id: Int?
     let name: String?
-   // let cod: Int?
+    let cod: Int?
     
     var dataTime: String {
         let epochTime = dt
         let newTime = Date(timeIntervalSince1970: TimeInterval(epochTime ?? Int(Date().timeIntervalSince1970)))
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = Constant.YYYY_MM_dd_HH_mm_ss
+        dateFormatter.dateFormat = Constant.MMM_d_YYYY
         return dateFormatter.string(from: newTime)
+    }
+}
+
+struct PresentableWeather: Identifiable {
+    let name: String
+    let weather: [CurrentWeatherResponse]
+    var id: String {
+        return name
     }
 }

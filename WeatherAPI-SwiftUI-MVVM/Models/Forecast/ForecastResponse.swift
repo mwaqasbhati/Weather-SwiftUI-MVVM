@@ -12,3 +12,12 @@ struct ForecastResponse: Codable {
     let list: [Forecast]?
     let city: City?
 }
+
+struct PresentableForecast: Identifiable {
+    let weekDay: String
+    let name: String
+    let forecast: [Forecast]
+    var id: String {
+        return weekDay
+    }
+}

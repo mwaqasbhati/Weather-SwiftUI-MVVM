@@ -2,8 +2,8 @@
 //  LoadingView.swift
 //  WeatherAPI-SwiftUI-MVVM
 //
-//  Created by Muhammad Zohaib Ehsan on 3/26/20.
-//  Copyright © 2020 Muhammad Zohaib Ehsan. All rights reserved.
+//  Created by M.Waqas on 3/26/20.
+//  Copyright © 2020 M.Waqas. All rights reserved.
 //
 
 import SwiftUI

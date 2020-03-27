@@ -9,8 +9,6 @@
 import Foundation
 import Combine
 
-
-
 struct Environment {
     static let BASE_URL = "http://api.openweathermap.org"
     static let API_KEY = "c4776cb2cb34dbb434a7d4f7e6bae3d3"
@@ -45,7 +43,6 @@ final class APIService: APIServiceType {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let decorder = JSONDecoder()
-     //   decorder.keyDecodingStrategy = .convertFromSnakeCase
         return URLSession.shared.dataTaskPublisher(for: request)
             .map { data, urlResponse in data }
             .mapError { _ in APIServiceError.responseError }

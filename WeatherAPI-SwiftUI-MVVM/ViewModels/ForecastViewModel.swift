@@ -9,19 +9,8 @@
 import Foundation
 import Combine
 
-struct PresentableForecast: Identifiable {
-    let weekDay: String
-    let name: String
-    let forecast: [Forecast]
-    var id: String {
-        return weekDay
-    }
-}
-
 class ForecastViewModel: ObservableObject {
     
-    private var cancellables: [AnyCancellable] = []
-
     // MARK: Input
     enum Input {
         case onAppear
@@ -31,45 +20,48 @@ class ForecastViewModel: ObservableObject {
         case .onAppear: onAppearSubject.send(())
         }
     }
+    
+    private var cancellables: [AnyCancellable] = []
     private let onAppearSubject = PassthroughSubject<Void, Never>()
     private let onGetLocSubject = PassthroughSubject<Void, Never>()
+    private let responseSubject = PassthroughSubject<ForecastResponse, Never>()
+    private let errorSubject = PassthroughSubject<APIServiceError, Never>()
 
     // MARK: Output
-    @Published private(set) var forecast: [PresentableForecast] = []
+    @Published private(set) var forecast = [PresentableForecast]()
     @Published var isErrorShown = false
     @Published var isLoading = true
     @Published var errorMessage = ""
-    @Published private(set) var shouldShowIcon = false
     
-    private let responseSubject = PassthroughSubject<ForecastResponse, Never>()
-    private let errorSubject = PassthroughSubject<APIServiceError, Never>()
-    private let trackingSubject = PassthroughSubject<TrackEventType, Never>()
     
     private let apiService: APIServiceType
-    private let trackerService: TrackerType
-    private var locationManager = LocationManager()
+    private let locationManager = LocationManager()
 
-    init(apiService: APIServiceType = APIService(),
-         trackerService: TrackerType = TrackerService(),
-         experimentService: ExperimentServiceType = ExperimentService()) {
+    // MARK: Initialzer
+    init(apiService: APIServiceType = APIService()) {
         self.apiService = apiService
-        self.trackerService = trackerService
-        
         getLocation()
+        bindOutputs()
     }
+    
+    // MARK: Helper
     private func getLocation() {
-        let subscriber = locationManager.objectWillChange.sink { (value) in
+        let subscriber = locationManager.objectWillChange.sink(receiveCompletion: { (completion) in
+            switch completion {
+                case .failure(let error):
+                    self.errorSubject.send(error)
+                case .finished: break
+            }
+        }) { (str) in
             
         }
-        
+                
         let placeholderSubs = locationManager.$placemark.sink { (placeMark) in
             if let name = placeMark?.locality {
                 self.bindInputs(currentLoc: name)
-                self.bindOutputs()
                 self.onGetLocSubject.send(())
             }
         }
-        
         cancellables.append(subscriber)
         cancellables.append(placeholderSubs)
     }
@@ -87,20 +79,11 @@ class ForecastViewModel: ObservableObject {
         }
         
         let responseStream = responsePublisher
-            .share()
+          //  .share()
             .subscribe(responseSubject)
-        
-        let trackingSubjectStream = trackingSubject
-            .sink(receiveValue: trackerService.log)
-        
-        let trackingStream = onAppearSubject
-            .map { .listView }
-            .subscribe(trackingSubject)
-        
+                
         cancellables += [
-            responseStream,
-            trackingSubjectStream,
-            trackingStream,
+            responseStream
         ]
     }
     
@@ -114,10 +97,7 @@ class ForecastViewModel: ObservableObject {
         
         let errorMessageStream = errorSubject
             .map { error -> String in
-                switch error {
-                case .responseError: return "network error"
-                case .parseError: return "parse error"
-                }
+                error.localizedDescription
             }
             .assign(to: \.errorMessage, on: self)
         
@@ -125,23 +105,17 @@ class ForecastViewModel: ObservableObject {
             .map{ error -> Bool in
                 self.isLoading = false
                 return true
-            }
+        }.receive(on: RunLoop.main)
             .assign(to: \.isErrorShown, on: self)
-        
-//        let showIconStream = onAppearSubject
-//            .map { [experimentService] _ in
-//                experimentService.experiment(for: .showIcon)
-//            }
-//            .assign(to: \.shouldShowIcon, on: self)
-        
+                
         cancellables += [
             repositoriesStream,
             errorStream,
             errorMessageStream
-            //,showIconStream
         ]
     }
     
+    // MARK: Data Transformer
     private func getPresentableData(_ forecastRes: ForecastResponse) -> [PresentableForecast] {
         var result = [PresentableForecast]()
         guard let forecast = forecastRes.list else { return result }

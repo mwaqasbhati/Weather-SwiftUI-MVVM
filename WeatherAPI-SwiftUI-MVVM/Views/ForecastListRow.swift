@@ -16,9 +16,9 @@ struct ForecastListRow: View {
     var body: some View {
         HStack(spacing: 10.0) {
             HStack() {
-                Text(forecast?.time ?? "12:00").bold()
+                Text(forecast?.time ?? "00:00").bold().padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
             }.background(Color.blue.opacity(0.5), alignment: .center)
-            VStack(alignment: .leading, spacing: 5.0) {
+            VStack(alignment: .leading, spacing: 8.0) {
                 HStack(spacing: 5.0) {
                     Text("Description: ").bold()
                     Text(forecast?.weather?.first?.weatherDescription?.rawValue ?? "")
