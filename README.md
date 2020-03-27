@@ -29,7 +29,7 @@ I have used `SwiftUI` for user interface creation, `Combine framework` allows me
 
 |             Current Weather         |         Weather Forecast          | 
 |---------------------------------|------------------------------|
-|![Demo]()|![Demo]()|
+|![Demo](https://github.com/mwaqasbhati/Weather-SwiftUI-MVVM/blob/master/screenshots/Weather.png)|![Demo](https://github.com/mwaqasbhati/Weather-SwiftUI-MVVM/blob/master/screenshots/Forecast.png)|
 
 ## Requirements
 
@@ -50,7 +50,7 @@ Checkout this repository, go to project directory, open it and run using Xcode.
 
 To build using xcodebuild without code signing
 ```
-xcodebuild clean build -workspace "NewsArticle.xcworkspace" -scheme "NewsArticle" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+xcodebuild clean build -scheme "WeatherAPI-SwiftUI-MVVM" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
 ```
 
 ## Tests
