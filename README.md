@@ -40,7 +40,7 @@ I have used `SwiftUI` for user interface creation, `Combine framework` allows me
 
 ## Architecture at a Glance
 
-![Architecture at a Glance]()
+![Architecture at a Glance](https://github.com/mwaqasbhati/Weather-SwiftUI-MVVM/blob/master/Architecture/MVVM.png)
 
 ## Installation
 
