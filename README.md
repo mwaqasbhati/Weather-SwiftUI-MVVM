@@ -5,17 +5,25 @@ This application fetches weather forecast from openweathermap API and displays d
 ## Demonstrations
 
 Covers the following:
+
+* Frameworks/Tools used
+* Discussions
 * Screenshots
 * Architecture 
+* Installation
 * Unit Tests and Coverage
-* CI/CD using Azure Devops
 
-Frameworks/Tools used:
+## Frameworks/Tools used:
+
 * SwiftUI
 * MVVM 
 * Combine Framework
 * Clubbing multiple network requests using Combine `mergeAll` feature.
 * XCTest Framework 
+
+## Discussions
+
+I have used `SwiftUI` for user interface creation, `Combine framework` allows me to use features like Observable, states, publishers and subscribers. `MVVM` design pattern helped me to use features like less code, more decoupling, modular approach, easy to test, Bindings make UI updates easier to handle, ease of maintainability etc.    
 
 ## Screenshots
 
@@ -55,10 +63,6 @@ xcodebuild -scheme "WeatherAPI-SwiftUI-MVVM" -sdk iphonesimulator -destination '
 
 ![Architecture at a Glance]()
 
-
-## Discussions
-
-I have used `SwiftUI` for user interface creation, `Combine framework` allows me to use features like Observable, states, publishers and subscribers. `MVVM` design pattern halped me to use features like less code, less code coupling, more modular, easy to test, Bindings make UI updates easier to handle, ease of maintainability etc.    
 
 ## Author
 
