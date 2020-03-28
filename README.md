@@ -57,7 +57,8 @@ xcodebuild clean build -scheme "WeatherAPI-SwiftUI-MVVM" CODE_SIGN_IDENTITY="" C
 
 To run tests using xcodebuild.
 ```
-xcodebuild -scheme "WeatherAPI-SwiftUI-MVVM" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone X,OS=13.3' test
+xcodebuild -scheme "WeatherAPI-SwiftUI-MVVM" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max,OS=13.3' test
+
 ```
 ## Coverage
 
