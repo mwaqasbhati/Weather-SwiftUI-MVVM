@@ -42,9 +42,9 @@ class CurrentWeatherViewModel_Tests: XCTestCase {
     }
     
     func testValidateSearchArray_Failure() {
-        let cancelable = systemUnderTest.$errorMessage.sink(receiveCompletion: { (completion) in
+        let _ = systemUnderTest.$errorMessage.sink(receiveCompletion: { (completion) in
             switch completion {
-            case .failure(let error):
+            case .failure(_):
               XCTAssertTrue(true)
             case .finished: break
             }
