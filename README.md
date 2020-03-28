@@ -61,7 +61,9 @@ xcodebuild -scheme "WeatherAPI-SwiftUI-MVVM" -sdk iphonesimulator -destination '
 ```
 ## Coverage
 
-![Architecture at a Glance]()
+> * Note: Test Coverage is less because Apple has not given any thing yet to test Swift View Classes
+
+![Test Cases and Coverage](https://github.com/mwaqasbhati/Weather-SwiftUI-MVVM/blob/master/screenshots/Coverage.png)
 
 
 ## Author
@@ -70,5 +72,5 @@ mwaqasbhati, m.waqas.bhati@hotmail.com
 
 ## License
 
-NewsArticle is available under the MIT license. See the LICENSE file for more info.
+Weather-SwiftUI-MVVM is available under the MIT license. See the LICENSE file for more info.
 
