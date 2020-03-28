@@ -17,7 +17,7 @@ enum APIServiceError: Error {
     var localizedDescription: String {
         switch self {
         case .responseError: return "network error"
-        case .parseError: return "Invalid response from server, please check city name spellings."
+        case .parseError: return "Invalid response from server, error in typing."
         case .networkError: return "Network is not available, please try again later."
         case .locationNotFound: return "Your current location not found."
         }

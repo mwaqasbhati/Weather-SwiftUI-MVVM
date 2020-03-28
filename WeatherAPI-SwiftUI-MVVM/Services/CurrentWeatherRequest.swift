@@ -20,7 +20,6 @@ struct CurrentWeatherRequest: APIRequestType {
     var path: String { return "/data/2.5/weather" }
     var queryItems: [URLQueryItem]? {
         return queryParams.map {
-            // Swift 4
             URLQueryItem(name: $0.0, value: $0.1)
         }
     }

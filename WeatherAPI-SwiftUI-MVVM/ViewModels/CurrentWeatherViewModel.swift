@@ -81,6 +81,7 @@ class CurrentWeatherViewModel: ObservableObject {
         if count > 2 && count < 8 {
             isLoading = true
             currentWeather.removeAll()
+            localWeather.removeAll()
             apply(.onSearch(searchArray: array))
         } else {
             errorMessage = Constant.INPUT_TEXT_VALIDATION_ERROR
@@ -101,6 +102,7 @@ class CurrentWeatherViewModel: ObservableObject {
             if case .failure(let error) = completion {
                 self.errorSubject.send(error)
                 self.isLoading = false
+                self.currentWeather = self.getPresentableData(self.localWeather)
                 self.bindInputs()
                 print("Got error: \(error.localizedDescription)")
             }

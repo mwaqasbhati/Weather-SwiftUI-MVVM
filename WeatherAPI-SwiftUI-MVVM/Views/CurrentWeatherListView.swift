@@ -24,7 +24,7 @@ struct CurrentWeatherListView: View {
                                     
                                 }) {
                                   UIApplication.shared.endEditing()
-                                }.keyboardType(.alphabet)
+                                    }.keyboardType(.alphabet).disableAutocorrection(true)
                                 Rectangle().frame(height: 1.0)
                                     .padding(.horizontal, 0.0).foregroundColor(Color.gray)
                             }

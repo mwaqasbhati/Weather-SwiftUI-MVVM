@@ -12,6 +12,8 @@ import CoreLocation
 
 class LocationManager: NSObject, ObservableObject {
   
+  //MARK: Properties
+  
   private let locationManager = CLLocationManager()
   private let geocoder = CLGeocoder()
   let objectWillChange = PassthroughSubject<String, APIServiceError>()
@@ -32,6 +34,8 @@ class LocationManager: NSObject, ObservableObject {
   }
   @Published var placemark: CLPlacemark?
 
+  //MARK: Initializers
+    
   override init() {
     super.init()
 
@@ -41,6 +45,8 @@ class LocationManager: NSObject, ObservableObject {
     self.locationManager.requestLocation()
   }
 
+   //MARK: Helper
+    
   private func geocode() {
     guard let location = self.location else { return }
     geocoder.reverseGeocodeLocation(location, completionHandler: { (places, error) in
@@ -52,6 +58,8 @@ class LocationManager: NSObject, ObservableObject {
     })
   }
 }
+
+//MARK: CLLocationManagerDelegate
 
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
