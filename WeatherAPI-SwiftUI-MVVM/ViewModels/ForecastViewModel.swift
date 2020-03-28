@@ -91,7 +91,7 @@ class ForecastViewModel: ObservableObject {
         let repositoriesStream = responseSubject
             .map {
                 self.isLoading = false
-                return self.getPresentableData(($0))
+                return ForecastViewModel.getPresentableData(($0))
             }
             .assign(to: \.forecast, on: self)
         
@@ -116,13 +116,13 @@ class ForecastViewModel: ObservableObject {
     }
     
     // MARK: Data Transformer
-    private func getPresentableData(_ forecastRes: ForecastResponse) -> [PresentableForecast] {
+    private static func getPresentableData(_ forecastRes: ForecastResponse) -> [PresentableForecast] {
         var result = [PresentableForecast]()
-        guard let forecast = forecastRes.list else { return result }
+        let forecast = forecastRes.list
         let days: [String] = forecast.map({ $0.weekDayString ?? "" }).removingDuplicates()
         days.forEach { (day) in
             let objects = forecast.filter({ $0.weekDayString == day })
-            result.append(PresentableForecast(weekDay: day, name: forecastRes.city?.name ?? "", forecast: objects))
+            result.append(PresentableForecast(weekDay: day, name: forecastRes.city.name ?? "", forecast: objects))
         }
         return result
     }

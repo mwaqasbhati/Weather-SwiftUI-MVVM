@@ -34,7 +34,7 @@ enum WeekDay: Int, Comparable {
     }
 }
 // MARK: - List
-struct Forecast: Codable, Identifiable {
+struct Forecast: Codable, Identifiable, Equatable {
     let dt: Int?
     let main: MainClass?
     let weather: [Weather]?

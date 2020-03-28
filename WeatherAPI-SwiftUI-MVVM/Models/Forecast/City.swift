@@ -6,7 +6,12 @@
 import Foundation
 
 // MARK: - City
-struct City: Codable {
+struct City: Codable, Equatable {
+
+    static func == (lhs: City, rhs: City) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     let id: Int?
     let name: String?
     let coord: Coord?

@@ -6,6 +6,6 @@
 import Foundation
 
 // MARK: - Clouds
-struct Clouds: Codable {
+struct Clouds: Codable, Equatable {
     let all: Int?
 }

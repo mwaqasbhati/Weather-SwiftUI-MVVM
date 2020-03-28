@@ -6,6 +6,6 @@
 import Foundation
 
 // MARK: - Sys
-struct Sys: Codable {
+struct Sys: Codable, Equatable {
     let pod: Pod?
 }

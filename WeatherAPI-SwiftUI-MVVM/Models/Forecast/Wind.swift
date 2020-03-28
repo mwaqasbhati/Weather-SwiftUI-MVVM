@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - Wind
-struct Wind: Codable {
+struct Wind: Codable, Equatable {
     let speed: Double?
     let deg: Int?
 }

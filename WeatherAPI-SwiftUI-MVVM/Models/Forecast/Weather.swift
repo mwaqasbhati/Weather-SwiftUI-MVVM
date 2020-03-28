@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - Weather
-struct Weather: Codable, Identifiable {
+struct Weather: Codable, Identifiable, Equatable {
     let id: Int?
     let main: MainEnum?
     let weatherDescription: Description?

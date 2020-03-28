@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Constant {
     static let YYYY_MM_dd_HH_mm_ss = "YYYY-MM-dd HH:mm:ss"
@@ -32,5 +33,11 @@ extension Array where Element: Equatable {
                 result.append(element)
             }
         }
+    }
+}
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

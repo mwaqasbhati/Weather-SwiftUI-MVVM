@@ -19,22 +19,20 @@ struct CurrentWeatherListView: View {
                     VStack(spacing: 10) {
                         Text("Note: You can search minimum 3 and maximum 7 cities and name should be comma separated.").bold()
                         HStack(spacing: 8) {
-                            VStack(alignment: .leading) {
-                                Image(systemName: "magnifyingglass")
-                            }
                             VStack() {
                                 TextField("Enter cities name.", text: self.$viewModel.searchText, onEditingChanged: { (edit) in
                                     
                                 }) {
-                                  self.viewModel.validateSearchArray()
-                                }
+                                  UIApplication.shared.endEditing()
+                                }.keyboardType(.alphabet)
                                 Rectangle().frame(height: 1.0)
                                     .padding(.horizontal, 0.0).foregroundColor(Color.gray)
                             }
                             Button(action: {
-                                self.viewModel.searchText = ""
+                                UIApplication.shared.endEditing()
+                                self.viewModel.validateSearchArray()
                             }) {
-                                Image(systemName: "xmark.circle.fill").foregroundColor(.secondary).opacity(self.viewModel.searchText == "" ? 0.0 : 1.0)
+                                Image(systemName: "magnifyingglass").padding().foregroundColor(.white).background(Color.blue)
                             }
                         }.padding()
                         List {

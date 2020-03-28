@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - Rain
-struct Rain: Codable {
+struct Rain: Codable, Equatable {
     let the3H: Double?
 
     enum CodingKeys: String, CodingKey {

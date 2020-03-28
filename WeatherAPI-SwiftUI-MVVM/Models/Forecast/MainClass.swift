@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - MainClass
-struct MainClass: Codable {
+struct MainClass: Codable, Equatable {
     let temp, feelsLike, tempMin, tempMax: Double?
     let pressure, seaLevel, grndLevel, humidity: Int?
     let tempKf: Double?

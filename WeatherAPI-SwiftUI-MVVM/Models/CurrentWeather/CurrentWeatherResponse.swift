@@ -8,9 +8,9 @@ import Foundation
 // MARK: - Welcome
 struct CurrentWeatherResponse: Codable, Identifiable {
     let coord: Coord?
-    let weather: [Weather]?
+    let weather: [Weather]
     let base: String?
-    let main: Main?
+    let main: Main
     let visibility: Int?
     let wind: Wind?
     let clouds: Clouds?

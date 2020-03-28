@@ -9,8 +9,8 @@ import Foundation
 struct ForecastResponse: Codable {
     let cod: String?
     let message, cnt: Int?
-    let list: [Forecast]?
-    let city: City?
+    let list: [Forecast]
+    let city: City
 }
 
 struct PresentableForecast: Identifiable {

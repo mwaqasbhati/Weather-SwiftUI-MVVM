@@ -20,11 +20,11 @@ struct CurrentWeatherListRow: View {
             VStack(alignment: .leading, spacing: 5.0) {
                 HStack(spacing: 5.0) {
                     Text("Description: ").bold()
-                    Text(weather.weather?.first?.weatherDescription?.rawValue ?? "")
+                    Text(weather.weather.first?.weatherDescription?.rawValue ?? "")
                 }
                 HStack(spacing: 5.0) {
                     Text("Temperature: ").bold()
-                    Text("\(weather.main?.tempMin?.formattedCelcius ?? "0.0") L / \(weather.main?.tempMax?.formattedCelcius ?? "0.0") H")
+                    Text("\(weather.main.tempMin?.formattedCelcius ?? "0.0") L / \(weather.main.tempMax?.formattedCelcius ?? "0.0") H")
                 }
                 HStack(spacing: 5.0) {
                     Text("Wind: ").bold()
